@@ -1,0 +1,153 @@
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\settings.py changed, reloading.
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\settings.py changed, reloading.
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\settings.py changed, reloading.
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\settings.py changed, reloading.
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\settings.py changed, reloading.
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /
+Not Found: /favicon.ico
+Watching for file changes with StatReloader
+Employee list accessed
+Employee list accessed
+Employee list accessed
+New employee created
+Employee list accessed
+Employee list accessed
+Internal Server Error: /update/22
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\deprecation.py", line 131, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\middleware\common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\middleware\common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/update/22/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+Internal Server Error: /update/22
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\deprecation.py", line 131, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\middleware\common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\middleware\common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via PUT, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining PUT data. Change your form to point to 127.0.0.1:8000/update/22/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+Internal Server Error: /update/22
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\deprecation.py", line 131, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\middleware\common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\middleware\common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/update/22/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+Method Not Allowed: /update/22/
+Internal Server Error: /update/22
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\deprecation.py", line 131, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\middleware\common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\middleware\common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via PUT, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining PUT data. Change your form to point to 127.0.0.1:8000/update/22/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+Employee updated successfully
+Employee deleted successfully
+Watching for file changes with StatReloader
+Employee list accessed
+Employee list accessed
+Employee list accessed
+Employee list accessed
+Employee list accessed
+Too Many Requests: /list/
+Employee list accessed
+Employee 21 deleted successfully
+Employee 23 deleted successfully
+Employee 24 deleted successfully
+Employee list accessed
+Failed employee creation: {'employe_name': [ErrorDetail(string='This field is required.', code='required')], 'employe_add': [ErrorDetail(string='This field is required.', code='required')], 'employe_number': [ErrorDetail(string='This field is required.', code='required')]}
+Bad Request: /create/
+Too Many Requests: /create/
+Failed employee creation: {'employe_name': [ErrorDetail(string='This field is required.', code='required')], 'employe_add': [ErrorDetail(string='This field is required.', code='required')], 'employe_number': [ErrorDetail(string='This field is required.', code='required')]}
+Bad Request: /create/
+Employee list accessed
+Failed employee creation: {'employe_name': [ErrorDetail(string='This field is required.', code='required')], 'employe_add': [ErrorDetail(string='This field is required.', code='required')], 'employe_number': [ErrorDetail(string='This field is required.', code='required')]}
+Bad Request: /create/
+Failed employee creation: {'employe_name': [ErrorDetail(string='This field is required.', code='required')], 'employe_add': [ErrorDetail(string='This field is required.', code='required')], 'employe_number': [ErrorDetail(string='This field is required.', code='required')]}
+Bad Request: /create/
+Failed employee creation: {'employe_name': [ErrorDetail(string='This field is required.', code='required')], 'employe_add': [ErrorDetail(string='This field is required.', code='required')], 'employe_number': [ErrorDetail(string='This field is required.', code='required')]}
+Bad Request: /create/
+Failed employee creation: {'employe_name': [ErrorDetail(string='This field is required.', code='required')], 'employe_add': [ErrorDetail(string='This field is required.', code='required')], 'employe_number': [ErrorDetail(string='This field is required.', code='required')]}
+Bad Request: /create/
+Failed employee creation: {'employe_name': [ErrorDetail(string='This field is required.', code='required')], 'employe_add': [ErrorDetail(string='This field is required.', code='required')], 'employe_number': [ErrorDetail(string='This field is required.', code='required')]}
+Bad Request: /create/
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Failed employee creation: {'employe_name': [ErrorDetail(string='This field is required.', code='required')], 'employe_add': [ErrorDetail(string='This field is required.', code='required')], 'employe_number': [ErrorDetail(string='This field is required.', code='required')]}
+Bad Request: /create/
+Failed employee creation: {'employe_name': [ErrorDetail(string='This field is required.', code='required')], 'employe_add': [ErrorDetail(string='This field is required.', code='required')], 'employe_number': [ErrorDetail(string='This field is required.', code='required')]}
+Bad Request: /create/
+Employee list accessed
+Failed employee creation: {'employe_name': [ErrorDetail(string='This field is required.', code='required')], 'employe_add': [ErrorDetail(string='This field is required.', code='required')], 'employe_number': [ErrorDetail(string='This field is required.', code='required')]}
+Bad Request: /create/
+Failed employee creation: {'employe_name': [ErrorDetail(string='This field is required.', code='required')], 'employe_add': [ErrorDetail(string='This field is required.', code='required')], 'employe_number': [ErrorDetail(string='This field is required.', code='required')]}
+Bad Request: /create/
+Employee list accessed
+Employee list accessed
+Too Many Requests: /list/
+Watching for file changes with StatReloader
+Employee list accessed
+New employee created
+Employee list accessed
+New employee created
+Employee list accessed
+Employee updated successfully
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Employee list accessed
+Employee list accessed
+Too Many Requests: /list/
+Too Many Requests: /list/
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\views.py changed, reloading.
+Watching for file changes with StatReloader
+Employee list accessed
+Employee list accessed
+Employee list accessed
+Too Many Requests: /list/
+Employee list accessed
+Employee list accessed
+Too Many Requests: /list/
+Too Many Requests: /list/

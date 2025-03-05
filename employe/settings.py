@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'appname',
-    'drf_api_logger',
+    
 ]
     
 
@@ -52,7 +52,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'drf_api_logger.middleware.api_logger_middleware',
 ]
 
 ROOT_URLCONF = 'employe.urls'
@@ -143,6 +142,40 @@ REST_FRAMEWORK = {
         'employee_list': '5/minute',  # Limit to 5 requests per minute
         'create_employee': '2/minute',  # Limit to 2 requests per minute
     }
+
+}
+REST_FRAMEWORK = {
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',  # Throttling for anonymous users
+        'rest_framework.throttling.UserRateThrottle',  # Throttling for authenticated users
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '2/minute',   # Anonymous users: 5 requests per minute
+        'user': '3/minute',  # Authenticated users: 10 requests per minute
+    }
 }
 
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': 'logs/api.log',  # Adjust path as needed
+        },
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        '': {
+            'handlers': ['file', 'console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
+}
 
