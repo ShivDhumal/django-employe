@@ -32,6 +32,7 @@ class employe_list(APIView):
 class Create(APIView):
     throttle_classes = [AnonRateThrottle, UserRateThrottle]
 
+    @silk_profile(name="Employee post API")
     def post(self, request):
         serializer = employe_serializer(data=request.data)
         if serializer.is_valid():
@@ -44,6 +45,7 @@ class Create(APIView):
 class Update(APIView):
     throttle_classes = [AnonRateThrottle, UserRateThrottle]
 
+    @silk_profile(name="Employee put API")
     def put(self, request, pk):
         try:
             item = employee.objects.get(pk=pk)

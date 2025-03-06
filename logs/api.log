@@ -168,3 +168,52 @@ Watching for file changes with StatReloader
 Watching for file changes with StatReloader
 Not Found: /
 Not Found: /favicon.ico
+Failed employee creation: {'employe_name': [ErrorDetail(string='This field is required.', code='required')], 'employe_add': [ErrorDetail(string='This field is required.', code='required')], 'employe_number': [ErrorDetail(string='This field is required.', code='required')]}
+Bad Request: /create/
+Failed employee creation: {'employe_name': [ErrorDetail(string='This field is required.', code='required')], 'employe_add': [ErrorDetail(string='This field is required.', code='required')], 'employe_number': [ErrorDetail(string='This field is required.', code='required')]}
+Bad Request: /create/
+Too Many Requests: /list/
+Too Many Requests: /list/
+Failed employee creation: {'employe_name': [ErrorDetail(string='This field is required.', code='required')], 'employe_add': [ErrorDetail(string='This field is required.', code='required')], 'employe_number': [ErrorDetail(string='This field is required.', code='required')]}
+Bad Request: /create/
+Employee list accessed
+Failed employee creation: {'employe_name': [ErrorDetail(string='This field is required.', code='required')], 'employe_add': [ErrorDetail(string='This field is required.', code='required')], 'employe_number': [ErrorDetail(string='This field is required.', code='required')]}
+Bad Request: /create/
+Watching for file changes with StatReloader
+Not Found: /
+Not Found: /favicon.ico
+Employee list accessed
+Method Not Allowed: /create/
+Employee list accessed
+Too Many Requests: /create/
+New employee created
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\views.py changed, reloading.
+Watching for file changes with StatReloader
+Method Not Allowed: /create/
+Employee list accessed
+Too Many Requests: /create/
+Too Many Requests: /create/
+Too Many Requests: /create/
+Watching for file changes with StatReloader
+Not Found: /
+Method Not Allowed: /create/
+Method Not Allowed: /create/
+Method Not Allowed: /create/
+Employee list accessed
+Too Many Requests: /create/
+Too Many Requests: /create/
+New employee created
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\views.py changed, reloading.
+Watching for file changes with StatReloader
+Employee list accessed
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\admin.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Method Not Allowed: /update/28/
+Employee updated successfully
+Employee list accessed
