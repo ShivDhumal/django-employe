@@ -8,6 +8,7 @@ from .serializers import employe_serializer
 from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 from silk.profiling.profiler import silk_profile
 
+
 logger = logging.getLogger(__name__)  #Helps in debugging and monitoring API access.
 
 class employe_list(APIView):

@@ -217,3 +217,40 @@ Watching for file changes with StatReloader
 Method Not Allowed: /update/28/
 Employee updated successfully
 Employee list accessed
+Watching for file changes with StatReloader
+Not Found: /
+Response to request with pk bd4d449d-4cc5-49f5-af46-c51509e7eb0b has content type text/javascript but was unable to parse it
+Response to request with pk 1e6e710e-9387-445c-a0b0-5af78d1e28e3 has content type text/javascript but was unable to parse it
+Response to request with pk d93bb7de-52f9-40da-a5d7-684dd8f1652c has content type text/javascript but was unable to parse it
+Watching for file changes with StatReloader
+Not Found: /
+Not Found: /favicon.ico
+Response to request with pk c38f54bc-834b-430b-8b52-88ebcf030dd3 has content type text/javascript but was unable to parse it
+Response to request with pk a13b8015-83f4-477e-9585-e8ffa80e44a7 has content type text/javascript but was unable to parse it
+Response to request with pk 750aaf9a-eee4-4f6a-8988-b1bf867133b4 has content type text/javascript but was unable to parse it
+Response to request with pk 1529a7c5-1d81-4a4d-adea-63078cd75c0f has content type text/javascript but was unable to parse it
+Response to request with pk 90f8c668-9d74-4f93-9595-33faa2a8c79d has content type text/javascript but was unable to parse it
+Response to request with pk 6e85c351-c696-42c6-844d-b77a2129dfa3 has content type text/javascript but was unable to parse it
+Response to request with pk 4d537562-059f-426c-afdc-174e8a7d9eef has content type text/javascript but was unable to parse it
+Response to request with pk 2b31a502-9c47-4f89-a451-c1a2aaf4b230 has content type text/javascript but was unable to parse it
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\admin.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\urls.py changed, reloading.
+Watching for file changes with StatReloader
