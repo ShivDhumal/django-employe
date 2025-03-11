@@ -1,0 +1,138 @@
+{% extends 'silk/base/root_base.html' %}
+{% load static %}
+{% load silk_inclusion %}
+
+{% block pagetitle %}Silky - Profiling - {{ silk_request.path }}{% endblock %}
+
+{% block style %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'silk/css/pages/profiling.css' %}" />
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="{% static 'silk/js/pages/profiling.js' %}"></script>
+{% endblock %}
+
+{% block menu %}
+    {% if silk_request %}
+        {% request_menu request silk_request %}
+    {% else %}
+        {% root_menu request %}
+    {% endif %}
+{% endblock %}
+
+{% block filter %}
+<form id="filter-form" action="." method="get" class="filter-form">
+    <!-- Show Option -->
+    <div class="filter-item">
+        <label>Show:</label>
+        <select name="show" onchange="this.form.submit();">
+            {% for option in options_show %}
+                <option value="{{ option }}" {% if option == show %}selected{% endif %}>{{ option }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <!-- Order By -->
+    <div class="filter-item">
+        <label>Order:</label>
+        <select name="order_by" onchange="this.form.submit();">
+            {% for option in options_order_by %}
+                <option value="{{ option }}" {% if option == order_by %}selected{% endif %}>{{ option }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</form>
+{% endblock %}
+
+{% block filters %}
+<h4>Profile</h4>
+<div class="filter-section">
+    <!-- Overall Time -->
+    <label>Took longer than:</label>
+    <input type="text" name="filter-overalltime-value" placeholder="milliseconds" value="{{ filters.overalltime.value }}" />
+
+    <!-- Number of Queries -->
+    <label>Executed more than:</label>
+    <input type="text" name="filter-numqueriesfilter-value" placeholder="n" value="{{ filters.numqueriesfilter.value }}" />
+
+    <!-- Time Spent -->
+    <label>Spent longer than:</label>
+    <input type="text" name="filter-timespentfilter-value" placeholder="milliseconds" value="{{ filters.timespentfilter.value }}" />
+</div>
+
+<h4>Date Range</h4>
+<div class="filter-section">
+    <!-- Seconds Ago -->
+    <label>Executed:</label>
+    <input type="text" name="filter-seconds-value" placeholder="seconds" value="{{ filters.seconds.value }}" />
+
+    <!-- Before Date -->
+    <label>Before:</label>
+    <input type="text" class="datetimepicker" name="filter-beforedate-value" placeholder="date" value="{{ filters.beforedate.value }}" />
+
+    <!-- After Date -->
+    <label>After:</label>
+    <input type="text" class="datetimepicker" name="filter-afterdate-value" placeholder="date" value="{{ filters.afterdate.value }}" />
+</div>
+
+<h4>Function</h4>
+<div class="filter-section">
+    <!-- Function Name -->
+    <label>Name:</label>
+    <select name="filter-name-value">
+        <option value="" {% if not filters.name.value %}selected{% endif %}></option>
+        {% for name in options_names %}
+            <option value="{{ name }}" {% if name == filters.name.value %}selected{% endif %}>
+                {{ name }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <!-- Function -->
+    <label>Function:</label>
+    <select name="filter-functionname-value">
+        <option value="" {% if not filters.functionname.value %}selected{% endif %}></option>
+        {% for func_name in options_func_names %}
+            <option value="{{ func_name }}" {% if func_name == filters.functionname.value %}selected{% endif %}>
+                {{ func_name }}
+            </option>
+        {% endfor %}
+    </select>
+</div>
+{% endblock %}
+
+{% block data %}
+{% if results %}
+    <div class="container">
+        <h2>Silk Profiler</h2>
+        <div class="results">
+            {% for profile in results %}
+                <a href="
+                    {% if silk_request %}
+                        {% url 'silk:request_profile_detail' request_id=silk_request.pk profile_id=profile.pk %}
+                    {% else %}
+                        {% url 'silk:profile_detail' profile_id=profile.pk %}
+                    {% endif %}
+                " class="result-item">
+                    {% profile_summary profile %}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% else %}
+    <div class="container">
+        <h2>Silk Profiler</h2>
+        <div class="description">
+            <p>No Silk profiling was performed for this request. Please check that:</p>
+            <ul>
+                <li>You've used the <code>@silk_profile</code> decorator or <code>with silk_profile():</code> context manager on the correct view.</li>
+                <li>You have <code>"silk"</code> in <code>INSTALLED_APPS</code>.</li>
+                <li>You have <code>"silk.middleware.SilkyMiddleware"</code> in <code>MIDDLEWARE</code>.</li>
+                <li>You have <code>SILKY_PYTHON_PROFILER</code> set to <code>True</code>.</li>
+            </ul>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

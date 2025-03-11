@@ -1,0 +1,134 @@
+{% extends "silk/base/base.html" %}
+{% load silk_filters %}
+{% load silk_inclusion %}
+{% load static %}
+
+{% block pagetitle %}Silky - Request - {{ silk_request.path }}{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'silk/css/components/cell.css' %}" />
+    <link rel="stylesheet" href="{% static 'silk/css/components/numeric.css' %}" />
+    <link rel="stylesheet" href="{% static 'silk/css/components/heading.css' %}" />
+    <link rel="stylesheet" href="{% static 'silk/css/pages/request.css' %}" />
+    <link rel="stylesheet" href="{% static 'silk/lib/highlight/foundation.css' %}" />
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'silk/lib/highlight/highlight.pack.js' %}"></script>
+    <script src="{% static 'silk/js/pages/request.js' %}"></script>
+    <script src="{% static 'silk/js/components/cell.js' %}"></script>
+{% endblock %}
+
+{% block menu %}
+    {% request_menu request silk_request %}
+{% endblock %}
+
+{% block data %}
+<div class="wrapper">
+    <div class="inner">
+        <!-- Request Summary -->
+        <div class="section">
+            <h2>Request Summary</h2>
+            <div class="summary">
+                {% request_summary silk_request %}
+            </div>
+        </div>
+
+        <!-- Query Parameters -->
+        {% if query_params %}
+        <div class="section">
+            <h3>Query Parameters</h3>
+            <pre class="code-block"><code>{{ query_params }}</code></pre>
+        </div>
+        {% endif %}
+
+        <!-- Request Headers -->
+        <div class="section">
+            <h3>Request Headers</h3>
+            <table class="data-table">
+                {% for k, v in silk_request.headers.items %}
+                <tr>
+                    <td class="key">{{ k.upper }}</td>
+                    <td class="value">{{ v }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <!-- Raw Request Body -->
+        {% if silk_request.raw_body %}
+        <div class="section">
+            <h3>Raw Request Body</h3>
+            {% if silk_request.raw_body|length > 1000 %}
+                <p>The raw request body is <b>{{ silk_request.raw_body|length }}</b> characters long and too large to display here.</p>
+                <a href="{% url "silk:raw" silk_request.pk %}?typ=request&subtyp=raw" class="view-link">View Raw Request Body</a>
+            {% else %}
+                <pre class="code-block">{{ silk_request.raw_body }}</pre>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <!-- Processed Request Body -->
+        {% if silk_request.body %}
+        <div class="section">
+            <h3>Request Body</h3>
+            <p>This is the body of the HTTP request represented as JSON:</p>
+            {% if silk_request.body|length > 1000 %}
+                <p>The request body is <b>{{ silk_request.body|length }}</b> characters long and too large to display here.</p>
+                <a href="{% url "silk:raw" silk_request.pk %}?typ=request&subtyp=processed" class="view-link">View Request Body</a>
+            {% else %}
+                <pre class="code-block"><code>{{ silk_request.body }}</code></pre>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <!-- Response Headers -->
+        {% if silk_request.response.headers %}
+        <div class="section">
+            <h3>Response Headers</h3>
+            <table class="data-table">
+                {% for k, v in silk_request.response.headers.items %}
+                <tr>
+                    <td class="key">{{ k.upper }}</td>
+                    <td class="value">{{ v }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% endif %}
+
+        <!-- Raw Response Body -->
+        {% if silk_request.response.raw_body %}
+        <div class="section">
+            <h3>Raw Response Body</h3>
+            {% with raw_body=silk_request.response.raw_body_decoded %}
+                {% if raw_body|length > 1000 %}
+                    <p>The raw response body is <b>{{ raw_body|length }}</b> characters long and too large to display here.</p>
+                    <a href="{% url "silk:raw" silk_request.pk %}?typ=response&subtyp=raw" class="view-link">View Raw Response Body</a>
+                {% else %}
+                    <pre class="code-block">{{ raw_body }}</pre>
+                {% endif %}
+            {% endwith %}
+        </div>
+        {% endif %}
+
+        <!-- Curl -->
+        {% if curl %}
+        <div class="section">
+            <h3>Curl</h3>
+            <p>Paste the following into a terminal to repeat this request:</p>
+            <pre class="code-block"><code>{{ curl.strip }}</code></pre>
+        </div>
+        {% endif %}
+
+        <!-- Django Test Client -->
+        {% if client %}
+        <div class="section">
+            <h3>Django Test Client</h3>
+            <p>The following code can be used to replicate this request in a Django test:</p>
+            <pre class="code-block"><code>{{ client.strip }}</code></pre>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

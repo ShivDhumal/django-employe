@@ -1,0 +1,130 @@
+{% extends 'silk/base/root_base.html' %}
+{% load silk_inclusion %}
+{% load static %}
+
+{% block menu %}
+    {% root_menu request %}
+{% endblock %}
+
+{% block pagetitle %}Silky - Summary{% endblock %}
+
+{% block style %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'silk/css/pages/summary.css' %}" />
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="{% static 'silk/js/pages/summary.js' %}"></script>
+{% endblock %}
+
+{% block data %}
+<div class="wrapper">
+    <div class="inner">
+        <!-- Filter Section -->
+        <div id="filters">
+            <form action="." name="filter-form" id="filter-form" method="post">
+                {% csrf_token %}
+                <div class="filter-group">
+                    <div class="filter-item">
+                        <label>Executed (seconds ago):</label>
+                        <input type="hidden" value="SecondsFilter" name="filter-seconds-typ" />
+                        <input type="text"
+                               placeholder="seconds"
+                               name="filter-seconds-value"
+                               value="{{ filters.seconds.value }}" />
+                    </div>
+
+                    <div class="filter-item">
+                        <label>Before:</label>
+                        <input type="hidden" value="BeforeDateFilter" name="filter-beforedate-typ" />
+                        <input class="datetimepicker"
+                               type="text"
+                               placeholder="date"
+                               name="filter-beforedate-value"
+                               value="{{ filters.beforedate.value }}" />
+                    </div>
+
+                    <div class="filter-item">
+                        <label>After:</label>
+                        <input type="hidden" value="AfterDateFilter" name="filter-afterdate-typ" />
+                        <input class="datetimepicker"
+                               type="text"
+                               placeholder="date"
+                               name="filter-afterdate-value"
+                               value="{{ filters.afterdate.value }}" />
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Summary Section -->
+        <h2>Summary</h2>
+        {% if num_requests %}
+            <div class="summary">
+                <div class="summary-card">
+                    <div class="value">{{ num_requests }}</div>
+                    <div class="label">Requests</div>
+                </div>
+                <div class="summary-card">
+                    <div class="value">{{ num_profiles }}</div>
+                    <div class="label">Profiles</div>
+                </div>
+                <div class="summary-card">
+                    <div class="value">{{ avg_overall_time | floatformat:0 }} ms</div>
+                    <div class="label">Avg. Time</div>
+                </div>
+                <div class="summary-card">
+                    <div class="value">{{ avg_num_queries | floatformat:2 }}</div>
+                    <div class="label">Avg. Queries</div>
+                </div>
+                <div class="summary-card">
+                    <div class="value">{{ avg_time_spent_on_queries | floatformat:0 }} ms</div>
+                    <div class="label">Avg. DB Time</div>
+                </div>
+            </div>
+        {% else %}
+            <p class="no-data">No data available</p>
+        {% endif %}
+
+        <!-- Most Time Overall -->
+        <h2>Most Time Overall</h2>
+        {% if longest_queries_by_view %}
+            {% for x in longest_queries_by_view %}
+                <a class="summary-link" href="{% url "silk:request_detail" request_id=x.pk %}">
+                    {{ x }}
+                </a>
+            {% endfor %}
+        {% else %}
+            <p class="no-data">No data</p>
+        {% endif %}
+
+        <!-- Most Time Spent in Database -->
+        <h2>Most Time Spent in Database</h2>
+        {% if most_time_spent_in_db %}
+            {% for x in most_time_spent_in_db %}
+                <a class="summary-link" href="{% url "silk:request_detail" request_id=x.pk %}">
+                    {{ x }}
+                </a>
+            {% endfor %}
+        {% else %}
+            <p class="no-data">No data</p>
+        {% endif %}
+
+        <!-- Most Database Queries -->
+        <h2>Most Database Queries</h2>
+        {% if most_queries %}
+            {% for x in most_queries %}
+                <a class="summary-link" href="{% url "silk:request_detail" request_id=x.pk %}">
+                    {{ x }}
+                </a>
+            {% endfor %}
+        {% else %}
+            <p class="no-data">No data</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block top %}{% endblock %}
+{% block filter %}{% endblock %}
