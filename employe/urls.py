@@ -19,6 +19,7 @@ from django.urls import path,include
 
 urlpatterns = [
     path('',include('appname.urls')),
+    path('',include('appname_1.urls')),
     path('      ', admin.site.urls),
     path('silk/', include('silk.urls', namespace='silk')),  # Silk dashboard
               ]
