@@ -7,6 +7,97 @@
 {% block style %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'silk/css/pages/requests.css' %}" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .filter-form, .filter-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding: 16px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 24px;
+        }
+
+        .filter-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+            min-width: 180px;
+        }
+
+        label {
+            font-weight: 600;
+            color: #555;
+        }
+
+        select, input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #fafafa;
+            transition: border-color 0.2s;
+            width: 100%;
+        }
+
+        select:focus, input[type="text"]:focus {
+            outline: none;
+            border-color: #4a90e2;
+            background-color: #fff;
+        }
+
+        h4 {
+            margin-bottom: 8px;
+            color: #4a90e2;
+            border-bottom: 2px solid #4a90e2;
+            display: inline-block;
+            padding-bottom: 4px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .results {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+        }
+
+        .request-item {
+            background-color: #ffffff;
+            padding: 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .request-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            border-color: #4a90e2;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 32px;
+            color: #999;
+        }
+
+        .empty h2 {
+            color: #4a90e2;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+    </style>
 {% endblock %}
 
 {% block js %}
@@ -68,85 +159,6 @@
         </select>
     </div>
 </form>
-{% endblock %}
-
-{% block filters %}
-<h4>Request</h4>
-<div class="filter-section">
-    <!-- Overall Time -->
-    <label>Took longer than:</label>
-    <input type="text" name="filter-overalltime-value" placeholder="milliseconds" value="{{ filters.overalltime.value }}" />
-
-    <!-- Number of Queries -->
-    <label>Executed more than:</label>
-    <input type="text" name="filter-numqueriesfilter-value" placeholder="n" value="{{ filters.numqueriesfilter.value }}" />
-
-    <!-- Time Spent -->
-    <label>Spent longer than:</label>
-    <input type="text" name="filter-timespentfilter-value" placeholder="milliseconds" value="{{ filters.timespentfilter.value }}" />
-</div>
-
-<h4>Date Range</h4>
-<div class="filter-section">
-    <!-- Seconds Ago -->
-    <label>Executed:</label>
-    <input type="text" name="filter-seconds-value" placeholder="seconds" value="{{ filters.seconds.value }}" />
-
-    <!-- Before Date -->
-    <label>Before:</label>
-    <input type="text" class="datetimepicker" name="filter-beforedate-value" placeholder="date" value="{{ filters.beforedate.value }}" />
-
-    <!-- After Date -->
-    <label>After:</label>
-    <input type="text" class="datetimepicker" name="filter-afterdate-value" placeholder="date" value="{{ filters.afterdate.value }}" />
-</div>
-
-<h4>View</h4>
-<div class="filter-section">
-    <!-- View Name -->
-    <label>View:</label>
-    <select name="filter-viewname-value">
-        <option value="" {% if not filters.viewname.value %}selected{% endif %}></option>
-        {% for view_name in view_names %}
-            <option value="{{ view_name }}" {% if view_name == filters.viewname.value %}selected{% endif %}>
-                {{ view_name }}
-            </option>
-        {% endfor %}
-    </select>
-
-    <!-- Path -->
-    <label>Path:</label>
-    <select name="filter-path-value">
-        <option value="" {% if not filters.path.value %}selected{% endif %}></option>
-        {% for path in options_paths %}
-            <option value="{{ path }}" {% if path == filters.path.value %}selected{% endif %}>
-                {{ path }}
-            </option>
-        {% endfor %}
-    </select>
-
-    <!-- Status Code -->
-    <label>Status Code:</label>
-    <select name="filter-status_code-value">
-        <option value="" {% if not filters.status_code.value %}selected{% endif %}></option>
-        {% for status_code in options_status_codes %}
-            <option value="{{ status_code }}" {% if status_code == filters.status_code.value %}selected{% endif %}>
-                {{ status_code }}
-            </option>
-        {% endfor %}
-    </select>
-
-    <!-- Method -->
-    <label>Method:</label>
-    <select name="filter-method-value">
-        <option value="" {% if not filters.method.value %}selected{% endif %}></option>
-        {% for method in options_methods %}
-            <option value="{{ method }}" {% if method == filters.method.value %}selected{% endif %}>
-                {{ method }}
-            </option>
-        {% endfor %}
-    </select>
-</div>
 {% endblock %}
 
 {% block data %}

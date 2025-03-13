@@ -19,108 +19,104 @@
 {% endblock %}
 
 {% block data %}
-<div class="wrapper">
+<div class="wrapper" style="background-color: #f9f9f9; padding: 20px; border-radius: 10px;">
     <div class="inner">
+
         <!-- Filter Section -->
-        <div id="filters">
+        <div id="filters" style="margin-bottom: 20px;">
             <form action="." name="filter-form" id="filter-form" method="post">
                 {% csrf_token %}
-                <div class="filter-group">
-                    <div class="filter-item">
-                        <label>Executed (seconds ago):</label>
+                <div class="filter-group" style="display: flex; gap: 10px;">
+                    <div class="filter-item" style="flex: 1;">
+                        <label style="color: #007bff; font-weight: bold;">Executed (seconds ago):</label>
                         <input type="hidden" value="SecondsFilter" name="filter-seconds-typ" />
                         <input type="text"
                                placeholder="seconds"
                                name="filter-seconds-value"
-                               value="{{ filters.seconds.value }}" />
+                               value="{{ filters.seconds.value }}"
+                               style="border: 1px solid #ccc; padding: 5px; border-radius: 5px; width: 100%;" />
                     </div>
 
-                    <div class="filter-item">
-                        <label>Before:</label>
+                    <div class="filter-item" style="flex: 1;">
+                        <label style="color: #007bff; font-weight: bold;">Before:</label>
                         <input type="hidden" value="BeforeDateFilter" name="filter-beforedate-typ" />
                         <input class="datetimepicker"
                                type="text"
                                placeholder="date"
                                name="filter-beforedate-value"
-                               value="{{ filters.beforedate.value }}" />
+                               value="{{ filters.beforedate.value }}"
+                               style="border: 1px solid #ccc; padding: 5px; border-radius: 5px; width: 100%;" />
                     </div>
 
-                    <div class="filter-item">
-                        <label>After:</label>
+                    <div class="filter-item" style="flex: 1;">
+                        <label style="color: #007bff; font-weight: bold;">After:</label>
                         <input type="hidden" value="AfterDateFilter" name="filter-afterdate-typ" />
                         <input class="datetimepicker"
                                type="text"
                                placeholder="date"
                                name="filter-afterdate-value"
-                               value="{{ filters.afterdate.value }}" />
+                               value="{{ filters.afterdate.value }}"
+                               style="border: 1px solid #ccc; padding: 5px; border-radius: 5px; width: 100%;" />
                     </div>
                 </div>
             </form>
         </div>
 
         <!-- Summary Section -->
-        <h2>Summary</h2>
+        <h2 style="color: #007bff; font-size: 24px; margin-bottom: 10px;">Summary</h2>
         {% if num_requests %}
-            <div class="summary">
-                <div class="summary-card">
-                    <div class="value">{{ num_requests }}</div>
-                    <div class="label">Requests</div>
+            <div class="summary" style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <div class="summary-card" style="background-color: #eaf6ff; padding: 20px; border-radius: 10px; flex: 1; text-align: center; border: 1px solid #b3d7ff;">
+                    <div class="value" style="color: #ff6600; font-size: 28px;">{{ num_requests }}</div>
+                    <div class="label" style="color: #666;">Requests</div>
                 </div>
-                <div class="summary-card">
-                    <div class="value">{{ num_profiles }}</div>
-                    <div class="label">Profiles</div>
+                <div class="summary-card" style="background-color: #fff3cd; padding: 20px; border-radius: 10px; flex: 1; text-align: center; border: 1px solid #ffeeba;">
+                    <div class="value" style="color: #ff0000; font-size: 28px;">{{ num_profiles }}</div>
+                    <div class="label" style="color: #666;">Profiles</div>
                 </div>
-                <div class="summary-card">
-                    <div class="value">{{ avg_overall_time | floatformat:0 }} ms</div>
-                    <div class="label">Avg. Time</div>
-                </div>
-                <div class="summary-card">
-                    <div class="value">{{ avg_num_queries | floatformat:2 }}</div>
-                    <div class="label">Avg. Queries</div>
-                </div>
-                <div class="summary-card">
-                    <div class="value">{{ avg_time_spent_on_queries | floatformat:0 }} ms</div>
-                    <div class="label">Avg. DB Time</div>
+                <div class="summary-card" style="background-color: #d4edda; padding: 20px; border-radius: 10px; flex: 1; text-align: center; border: 1px solid #c3e6cb;">
+                    <div class="value" style="color: #28a745; font-size: 28px;">{{ avg_overall_time | floatformat:0 }} ms</div>
+                    <div class="label" style="color: #666;">Avg. Time</div>
                 </div>
             </div>
         {% else %}
-            <p class="no-data">No data available</p>
+            <p class="no-data" style="color: red;">No data available</p>
         {% endif %}
 
         <!-- Most Time Overall -->
-        <h2>Most Time Overall</h2>
+        <h2 style="color: #17844d; margin-top: 20px;">Most Time Overall</h2>
         {% if longest_queries_by_view %}
             {% for x in longest_queries_by_view %}
-                <a class="summary-link" href="{% url "silk:request_detail" request_id=x.pk %}">
+                <a class="summary-link" href="{% url "silk:request_detail" request_id=x.pk %}" style="color: #12b1b1; text-decoration: none; display: block; padding: 5px 0;">
                     {{ x }}
                 </a>
             {% endfor %}
         {% else %}
-            <p class="no-data">No data</p>
+            <p class="no-data" style="color: red;">No data</p>
         {% endif %}
 
         <!-- Most Time Spent in Database -->
-        <h2>Most Time Spent in Database</h2>
+        <h2 style="color: #17844d; margin-top: 20px;">Most Time Spent in Database</h2>
         {% if most_time_spent_in_db %}
             {% for x in most_time_spent_in_db %}
-                <a class="summary-link" href="{% url "silk:request_detail" request_id=x.pk %}">
+                <a class="summary-link" href="{% url "silk:request_detail" request_id=x.pk %}" style="color: #12b1b1; text-decoration: none; display: block; padding: 5px 0;">
                     {{ x }}
                 </a>
             {% endfor %}
         {% else %}
-            <p class="no-data">No data</p>
+            <p class="no-data" style="color: red;">No data</p>
         {% endif %}
 
         <!-- Most Database Queries -->
-        <h2>Most Database Queries</h2>
+        <h2 style="color: #17844d; margin-top: 20px;">Most Database Queries</h2>
         {% if most_queries %}
             {% for x in most_queries %}
-                <a class="summary-link" href="{% url "silk:request_detail" request_id=x.pk %}">
+                <a class="summary-link" href="{% url "silk:request_detail" request_id=x.pk %}" style="color: #12b1b1; text-decoration: none; display: block; padding: 5px 0;">
                     {{ x }}
                 </a>
             {% endfor %}
         {% else %}
-            <p class="no-data">No data</p>
+            <p class="no-data" style="color: red;">No data</p>
         {% endif %}
     </div>
 </div>
