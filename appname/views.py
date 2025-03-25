@@ -10,6 +10,15 @@ from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 from silk.profiling.profiler import silk_profile
 from django.db.models import Avg, Sum
 from silk.models import Request, Profile
+from django.shortcuts import render
+
+from django.http import JsonResponse
+from silk.models import Request
+from django.db.models import Avg
+
+
+
+
 
 logger = logging.getLogger(__name__)
 
@@ -77,21 +86,33 @@ class Delete(APIView):
             logger.error(f"Delete failed: Employee {pk} not found")
             raise Http404("Employee Not Found")
 
-def silk_data(request):
-    requests_count = Request.objects.count()
-    profiles_count = Profile.objects.count()
-    avg_response_time = Request.objects.aggregate(avg_time=Avg('time_taken'))['avg_time'] or 0  
-    total_sql_queries = Request.objects.aggregate(total_queries=Sum('num_sql_queries'))['total_queries'] or 0
-    total_db_time = Request.objects.aggregate(total_db_time=Sum('meta_time_spent_queries'))['total_db_time'] or 0
-    avg_query_time = Request.objects.aggregate(avg_db_time=Avg('meta_time_spent_queries'))['avg_db_time'] or 0
 
-    return JsonResponse({
-        "requests": requests_count,
-        "profiles": profiles_count,
-        "avg_response_time": round(avg_response_time, 2),
-        "avg_num_queries": round(total_sql_queries / requests_count, 2) if requests_count else 0,
-        "avg_query_time": round(avg_query_time, 2)
-    })  
+
+def silk_chart_data(request):
+    try:
+        total_requests = Request.objects.count()
+        total_profiles = Profile.objects.count()
+        total_response_time = sum(p.time_taken or 0 for p in Profile.objects.all())
+        total_query_time = sum(sum(q.time_taken for q in p.queries.all()) for p in Profile.objects.all())
+        total_query_count = sum(p.queries.count() for p in Profile.objects.all())
+
+        avg_response_time = total_response_time / total_profiles if total_profiles else 0
+        avg_query_time = total_query_time / total_profiles if total_profiles else 0
+        avg_num_queries = total_query_count / total_profiles if total_profiles else 0
+
+        data = {
+            'requests': total_requests,
+            'profiles': total_profiles,
+            'avg_response_time': round(avg_response_time * 1000, 2),
+            'avg_query_time': round(avg_query_time * 1000, 2),
+            'avg_num_queries': round(avg_num_queries, 2)
+        }
+        return JsonResponse(data)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
+        
+                            
 
 def silk_chart_view(request):
     return render(request, 'silk/chart.html')
+

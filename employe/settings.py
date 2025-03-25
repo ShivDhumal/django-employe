@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -58,12 +59,13 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'employe.urls'
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'DIRS': [os.path.join(BASE_DIR, "appname", "templates")],  # Ensure path is correct
+        'APP_DIRS': True,  # Must be True for Django to look inside `templates/`
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -81,10 +83,12 @@ WSGI_APPLICATION = 'employe.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+BASE_DIR = Path(__file__).resolve().parent.parent  # ✅ Use Path instead of os.path
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',  # ✅ Now it works correctly
     }
 }
 
