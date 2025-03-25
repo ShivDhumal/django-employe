@@ -547,3 +547,169 @@ Watching for file changes with StatReloader
 Not Found: /
 Watching for file changes with StatReloader
 Not Found: /
+Watching for file changes with StatReloader
+Employee list accessed
+Failed employee creation: {'employe_name': [ErrorDetail(string='This field is required.', code='required')], 'employe_add': [ErrorDetail(string='This field is required.', code='required')], 'employe_number': [ErrorDetail(string='This field is required.', code='required')]}
+Bad Request: /create/
+Failed employee creation: {'employe_name': [ErrorDetail(string='This field is required.', code='required')], 'employe_add': [ErrorDetail(string='This field is required.', code='required')], 'employe_number': [ErrorDetail(string='This field is required.', code='required')]}
+Bad Request: /create/
+Failed employee creation: {'employe_name': [ErrorDetail(string='This field is required.', code='required')], 'employe_add': [ErrorDetail(string='This field is required.', code='required')], 'employe_number': [ErrorDetail(string='This field is required.', code='required')]}
+Bad Request: /create/
+Failed employee creation: {'employe_name': [ErrorDetail(string='This field is required.', code='required')], 'employe_add': [ErrorDetail(string='This field is required.', code='required')], 'employe_number': [ErrorDetail(string='This field is required.', code='required')]}
+Bad Request: /create/
+Too Many Requests: /create/
+Failed employee creation: {'employe_name': [ErrorDetail(string='This field is required.', code='required')], 'employe_add': [ErrorDetail(string='This field is required.', code='required')], 'employe_number': [ErrorDetail(string='This field is required.', code='required')]}
+Bad Request: /create/
+Watching for file changes with StatReloader
+Not Found: /
+Not Found: /favicon.ico
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Not Found: /
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\views.py changed, reloading.
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\views.py changed, reloading.
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Not Found: /
+Not Found: /
+Not Found: /
+Not Found: /admin/
+Not Found: /admin/
+Watching for file changes with StatReloader
+Not Found: /
+Not Found: /admin/
+Employee list accessed
+New employee created
+Not Found: /
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Not Found: /
+New employee created
+New employee created
+Too Many Requests: /list/
+Employee list accessed
+Watching for file changes with StatReloader
+Not Found: /
+Watching for file changes with StatReloader
+Not Found: /
+Not Found: /favicon.ico
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /
+Internal Server Error: /chart/
+Traceback (most recent call last):
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\views.py", line 23, in api_performance_chart
+    {"path": req.path, "time_taken": req.time_taken, "num_queries": req.num_queries}
+                                                                    ^^^^^^^^^^^^^^^
+AttributeError: 'Request' object has no attribute 'num_queries'. Did you mean: 'num_sql_queries'?
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Not Found: /
+Not Found: /favicon.ico
+Not Found: /sill-chart/
+Internal Server Error: /silk-chart/
+Traceback (most recent call last):
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\views.py", line 97, in silk_chart_view
+    return render(request, 'chart.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: chart.html
+Internal Server Error: /silk-chart/
+Traceback (most recent call last):
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\views.py", line 97, in silk_chart_view
+    return render(request, 'chart.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: chart.html
+Internal Server Error: /silk-chart/
+Traceback (most recent call last):
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\views.py", line 97, in silk_chart_view
+    return render(request, 'chart.html')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: chart.html
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /

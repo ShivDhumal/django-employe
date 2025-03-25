@@ -1,0 +1,68 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silk Performance Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        #silkChart {
+            width: 100% !important;
+            height: 500px !important;
+            max-width: 800px;
+            max-height: 500px;
+            display: block;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Performance Metrics</h2>
+    <canvas id="silkChart" width="800" height="500"></canvas>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch("/silk-data/")  // Correct API URL
+                .then(response => response.json())
+                .then(data => {
+                    var ctx = document.getElementById('silkChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'bar',  
+                        data: {
+                            labels: ['Requests', 'Profiles', 'Avg Time (ms)', 'Avg Queries', 'Avg DB Time (ms)'],
+                            datasets: [{
+                                label: 'Performance Metrics',
+                                data: [
+                                    data.requests,
+                                    data.profiles,
+                                    data.avg_response_time,
+                                    data.avg_num_queries,
+                                    data.avg_query_time
+                                ],
+                                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF']
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                y: { beginAtZero: true }
+                            }
+                        }
+                    });
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        });
+    </script> 
+
+</body>
+</html>

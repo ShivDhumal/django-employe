@@ -2,19 +2,21 @@ import logging
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
-from django.http import Http404
+from django.http import Http404, JsonResponse
+from django.shortcuts import render
 from .models import employee
 from .serializers import employe_serializer
 from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 from silk.profiling.profiler import silk_profile
+from django.db.models import Avg, Sum
+from silk.models import Request, Profile
 
-
-logger = logging.getLogger(__name__)  #Helps in debugging and monitoring API access.
+logger = logging.getLogger(__name__)
 
 class employe_list(APIView):
-    throttle_classes = [AnonRateThrottle, UserRateThrottle]  # Apply throttling to all methods
+    throttle_classes = [AnonRateThrottle, UserRateThrottle]
 
-    @silk_profile(name="Employee List API")  # Silk profiling added
+    @silk_profile(name="Employee List API")
     def get(self, request, pk=None):
         try:
             if pk:
@@ -74,3 +76,22 @@ class Delete(APIView):
         except employee.DoesNotExist:
             logger.error(f"Delete failed: Employee {pk} not found")
             raise Http404("Employee Not Found")
+
+def silk_data(request):
+    requests_count = Request.objects.count()
+    profiles_count = Profile.objects.count()
+    avg_response_time = Request.objects.aggregate(avg_time=Avg('time_taken'))['avg_time'] or 0  
+    total_sql_queries = Request.objects.aggregate(total_queries=Sum('num_sql_queries'))['total_queries'] or 0
+    total_db_time = Request.objects.aggregate(total_db_time=Sum('meta_time_spent_queries'))['total_db_time'] or 0
+    avg_query_time = Request.objects.aggregate(avg_db_time=Avg('meta_time_spent_queries'))['avg_db_time'] or 0
+
+    return JsonResponse({
+        "requests": requests_count,
+        "profiles": profiles_count,
+        "avg_response_time": round(avg_response_time, 2),
+        "avg_num_queries": round(total_sql_queries / requests_count, 2) if requests_count else 0,
+        "avg_query_time": round(avg_query_time, 2)
+    })  
+
+def silk_chart_view(request):
+    return render(request, 'silk/chart.html')
