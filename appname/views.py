@@ -88,6 +88,8 @@ class Delete(APIView):
 
 
 
+
+
 def silk_chart_data(request):
     try:
         total_requests = Request.objects.count()
@@ -111,8 +113,31 @@ def silk_chart_data(request):
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=500)
         
-                            
-
 def silk_chart_view(request):
     return render(request, 'silk/chart.html')
+
+#for most_db_queries.html
+
+def most_queries_chart_page(request):
+    return render(request, 'silk/most_db_queries.html')
+
+def most_queries_chart_api(request):
+    data = [{'view_name': r.view_name, 'num_queries': r.num_sql_queries} for r in Request.objects.order_by('-num_sql_queries')]
+    return JsonResponse(data, safe=False)  # ✅ Corrected syntax
+
+
+
+#for chart_most_time_overall.html
+
+def most_time_chart_page(request):
+    return render(request, 'silk/chart_most_time_overall.html')
+
+def most_time_overall_data(request):
+    data = [{'path': r.path, 'time_taken': round(r.time_taken, 2)} for r in Request.objects.order_by('-time_taken')[:10]]
+    return JsonResponse(data,safe=False)
+
+
+       
+                            
+
 
