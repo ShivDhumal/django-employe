@@ -94,6 +94,9 @@
         {% else %}
             <p class="no-data" style="color: red;">No data</p>
         {% endif %}
+        <a href="{% url 'chart_most_time_overall' %}">
+            <button>Go to Chart</button>
+        </a>
 
         <!-- Most Time Spent in Database -->
         <h2 style="color: #17844d; margin-top: 20px;">Most Time Spent in Database</h2>
@@ -118,6 +121,10 @@
         {% else %}
             <p class="no-data" style="color: red;">No data</p>
         {% endif %}
+        <a href="{% url 'most_db_queries' %}">
+
+            <button>Go to Chart</button>
+        </a>
     </div>
 </div>
 

@@ -6,12 +6,15 @@ from appname.views import (
     Create, 
     Update, 
     Delete,
-    most_queries_chart_page,  
-    most_queries_chart_api,   
-    most_time_chart_page,      # ✅ Added import for Most Time Chart Page
-    most_time_overall_data  ,# ✅ Added import for Most Time Overall API
+   most_queries_chart_api,   
+   most_time_overall_data  ,# ✅ Added import for Most Time Overall API
+    
   
 )
+from .views import chart_most_time_overall_view
+from .views import most_db_queries_view  # Import the new view
+
+
 
 urlpatterns = [
     path('list/<int:pk>/', employe_list.as_view(), name='view_list'),
@@ -25,11 +28,13 @@ urlpatterns = [
     path('api/silk-data/', silk_chart_data, name='silk_chart_data'),
 
     # ✅ URLs for `most_db_queries.html`
-    path('silk/most-queries/', most_queries_chart_page, name='most_queries_chart_page'),  
+    
+    path('silk/most_db_queries/', most_db_queries_view, name='most_db_queries'),
     path('api/silk-most-queries/', most_queries_chart_api, name='most_queries_chart_api'),  
 
     # ✅ New URLs for `chart_most_time_overall.html`
-    path('silk/most-time-overall/', most_time_chart_page, name='most_time_chart_page'),
+
+    path('silk/chart_most_time_overall/', chart_most_time_overall_view, name='chart_most_time_overall'),
     path('api/silk-most-time-overall/', most_time_overall_data, name='most_time_overall_data'),  # Returns JSON data
    
 ]

@@ -118,9 +118,8 @@ def silk_chart_view(request):
 
 #for most_db_queries.html
 
-def most_queries_chart_page(request):
+def most_db_queries_view(request):
     return render(request, 'silk/most_db_queries.html')
-
 def most_queries_chart_api(request):
     data = [{'view_name': r.view_name, 'num_queries': r.num_sql_queries} for r in Request.objects.order_by('-num_sql_queries')]
     return JsonResponse(data, safe=False)  # ✅ Corrected syntax
@@ -128,8 +127,7 @@ def most_queries_chart_api(request):
 
 
 #for chart_most_time_overall.html
-
-def most_time_chart_page(request):
+def chart_most_time_overall_view(request):
     return render(request, 'silk/chart_most_time_overall.html')
 
 def most_time_overall_data(request):
