@@ -21,7 +21,11 @@ from django.urls import path,include
 
 urlpatterns = [
     path('',include('appname.urls')),
-    path('      ', admin.site.urls),
+    # path('      ', admin.site.urls),
     path('silk/', include('silk.urls', namespace='silk')),  # Silk dashboard
+
+    # for myapp
+    path('admin/', admin.site.urls),
+    path('myapp/', include('myapp.urls')),  # Include myapp routes
 ]
 

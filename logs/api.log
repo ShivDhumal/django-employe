@@ -2134,3 +2134,138 @@ C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\urls.py changed, reloading.
 Watching for file changes with StatReloader
 C:\Users\Admin\OneDrive\Desktop\DRF\employe\appname\urls.py changed, reloading.
 Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\myapp\models.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Not Found: /
+Forbidden (CSRF token from POST incorrect.): /      login/
+Watching for file changes with StatReloader
+Not Found: /
+Watching for file changes with StatReloader
+Not Found: /
+Internal Server Error: /students/
+Traceback (most recent call last):
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\myapp\views.py", line 8, in student_list
+    return render(request, 'myapp/student_list.html', {'students': students})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: myapp/student_list.html
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\myapp\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\myapp\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\myapp\serializers.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /
+Not Found: /students/
+Watching for file changes with StatReloader
+Not Found: /students/add/
+Not Found: /students/add/
+Not Found: /students/add/
+Not Found: /students/add/
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\myapp\views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /students/add/
+Not Found: /students/add
+Not Found: /students/add/
+Not Found: /students/
+Watching for file changes with StatReloader
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Watching for file changes with StatReloader
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Watching for file changes with StatReloader
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Watching for file changes with StatReloader
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Watching for file changes with StatReloader
+Not Found: /students/add/
+Method Not Allowed: /list/
+Employee list accessed
+Not Found: /students/add/
+Not Found: /students/add/
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /students/add/
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Not Found: /
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\myapp\admin.py changed, reloading.
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\myapp\admin.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Cannot execute silk_profile as silk is not installed correctly.
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\urls.py changed, reloading.
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\urls.py changed, reloading.
+C:\Users\Admin\OneDrive\Desktop\DRF\employe\employe\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Not Found: /students/
+Student list accessed
+Too Many Requests: /myapp/students/edit/2/
+Method Not Allowed: /myapp/students/edit/2/
+Too Many Requests: /myapp/students/edit/2/
+Method Not Allowed: /myapp/students/edit/2/
+Student updated successfully
+Too Many Requests: /myapp/students/
