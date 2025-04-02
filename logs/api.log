@@ -2324,3 +2324,15 @@ Too Many Requests: /myapp/students/delete/6/
 C:\Users\Admin\OneDrive\Desktop\drf_demo\django-employe\myapp\views.py changed, reloading.
 Watching for file changes with StatReloader
 Student 6 deleted successfully
+C:\Users\Admin\OneDrive\Desktop\drf_demo\django-employe\myapp\views.py changed, reloading.
+Watching for file changes with StatReloader
+Delete failed: Student 6 not found
+Not Found: /myapp/students/delete/6/
+Student list accessed
+Too Many Requests: /myapp/students/edit/4/
+Too Many Requests: /myapp/students/edit/4/
+Student updated successfully
+Student updated successfully
+Watching for file changes with StatReloader
+Employee list accessed
+Employee list accessed

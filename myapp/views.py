@@ -75,7 +75,7 @@ class StudentDelete(APIView):
         
 def demo_profiles_view(request):
     # Fetch the profiling data for 'demo'
-    user_profiles = Request.objects.filter(path__startswith="/")
+    user_profiles = Request.objects.filter(path__startswith="/myapp/")
 
     # Aggregate by method and calculate the average time taken for each method
     aggregated_profiles = user_profiles.values('method').annotate(
