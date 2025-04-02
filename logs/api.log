@@ -2269,3 +2269,5 @@ Too Many Requests: /myapp/students/edit/2/
 Method Not Allowed: /myapp/students/edit/2/
 Student updated successfully
 Too Many Requests: /myapp/students/
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
