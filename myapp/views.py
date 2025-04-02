@@ -56,7 +56,7 @@ class StudentUpdate(APIView):
             return Response({'message': 'Student updated successfully', 'data': serializer.data})
         logger.error("Update failed for Student")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+#for deletion
 class StudentDelete(APIView):
     throttle_classes = [AnonRateThrottle, UserRateThrottle]
 
