@@ -104,7 +104,24 @@
 {% endblock %}
 
 {% block data %}
-{% if results %}
+
+<div class="container py-4">
+    <h2 class="text-2xl text-center text-teal-600 font-semibold mb-6">Silk Profiler</h2>
+    <div class="grid grid-cols-2 gap-6">
+        
+        <!-- Button for API Analytics (for the 'api' app) -->
+        <button type="button" class="btn-custom py-3 bg-white text-teal-600 border-2 border-teal-600 rounded-md hover:bg-teal-100 transition duration-300" onclick="window.location.href='/silk/user_prof/';">
+            Account API Analytics
+        </button>
+        
+        <!-- Button for Staff API Analytics (for the 'api_staff' app) -->
+        <button type="button" class="btn-custom py-3 bg-white text-teal-600 border-2 border-teal-600 rounded-md hover:bg-teal-100 transition duration-300" onclick="window.location.href='/silk/demo_prof/';">
+            Demo API Analytics
+        </button>
+    
+    </div>
+
+<!-- {% if results %}
     <div class="container">
         <h2>Silk Profiler</h2>
         <div class="results">
@@ -118,8 +135,8 @@
                 " class="result-item">
                     {% profile_summary profile %}
                 </a>
-            {% endfor %}
-        </div>
+            {% endfor %} -->
+        <!-- </div>
     </div>
 {% else %}
     <div class="container">
@@ -133,6 +150,9 @@
                 <li>You have <code>SILKY_PYTHON_PROFILER</code> set to <code>True</code>.</li>
             </ul>
         </div>
-    </div>
-{% endif %}
-{% endblock %}
+    </div> -->
+
+
+<!--    
+{% endif %} -->
+{% endblock %} 

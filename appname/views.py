@@ -136,6 +136,25 @@ def most_time_overall_data(request):
 
 
        
+
+def user_profiles_view(request):
+    # Fetch the profiling data for 'demo'
+    user_profiles = Request.objects.filter(path__startswith="/")
+
+    # Aggregate by method and calculate the average time taken for each method
+    aggregated_profiles = user_profiles.values('method').annotate(
+        avg_time_taken=Avg('time_taken')
+    )
+
+    # Convert the QuerySet to a list of dictionaries (serializable)
+    aggregated_profiles_list = list(aggregated_profiles)
+
+    context = {
+        'aggregated_profiles': aggregated_profiles_list,
+    }
+    return render(request, 'silk/appname_profiling.html',context)
+    # return render(request, 'silk/appname_profiling.html', context)      
+     
                             
 
 

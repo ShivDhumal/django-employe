@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from appname.views import user_profiles_view
 
 
 
@@ -23,6 +24,8 @@ urlpatterns = [
     path('',include('appname.urls')),
     # path('      ', admin.site.urls),
     path('silk/', include('silk.urls', namespace='silk')),  # Silk dashboard
+    path('silk/user_prof/', user_profiles_view, name ='user_profiling'),
+    # path('silk/demo_prof/', demo_profiles_view, name = 'demo_profiling'),
 
     # for myapp
     path('admin/', admin.site.urls),
