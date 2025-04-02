@@ -7,11 +7,14 @@ from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 from silk.profiling.profiler import silk_profile
 from .models import Student
 from .serializers import StudentSerializer
+from silk.models import Request
+from django.shortcuts import render
+from django.db.models import Avg
 
 logger = logging.getLogger(__name__)
 
 class StudentList(APIView):
-    throttle_classes = [AnonRateThrottle, UserRateThrottle]
+    # throttle_classes = [AnonRateThrottle, UserRateThrottle]
 
     @silk_profile(name="Student List API")
     def get(self, request, pk=None):
@@ -69,3 +72,20 @@ class StudentDelete(APIView):
         except Student.DoesNotExist:
             logger.error(f"Delete failed: Student {pk} not found")
             raise Http404("Student Not Found")
+        
+def demo_profiles_view(request):
+    # Fetch the profiling data for 'demo'
+    user_profiles = Request.objects.filter(path__startswith="/")
+
+    # Aggregate by method and calculate the average time taken for each method
+    aggregated_profiles = user_profiles.values('method').annotate(
+        avg_time_taken=Avg('time_taken')
+    )
+
+    # Convert the QuerySet to a list of dictionaries (serializable)
+    aggregated_profiles_list = list(aggregated_profiles)
+
+    context = {
+        'aggregated_profiles': aggregated_profiles_list,
+    }
+    return render(request,'silk/myapp_profiling.html',context)

@@ -2293,3 +2293,34 @@ Not Found: /students/
 Watching for file changes with StatReloader
 Not Found: /students/
 Student list accessed
+C:\Users\Admin\OneDrive\Desktop\drf_demo\django-employe\myapp\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\drf_demo\django-employe\myapp\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\drf_demo\django-employe\employe\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /silk/demo_prof/
+Traceback (most recent call last):
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive\Desktop\drf_demo\django-employe\myapp\views.py", line 75, in demo_profiles_view
+    user_profiles = Request.objects.filter(path__startswith="/")
+                    ^^^^^^^
+NameError: name 'Request' is not defined. Did you mean: 'request'?
+C:\Users\Admin\OneDrive\Desktop\drf_demo\django-employe\myapp\views.py changed, reloading.
+Watching for file changes with StatReloader
+Student list accessed
+Too Many Requests: /myapp/students/add/
+C:\Users\Admin\OneDrive\Desktop\drf_demo\django-employe\myapp\views.py changed, reloading.
+Watching for file changes with StatReloader
+Too Many Requests: /myapp/students/
+Student list accessed
+Method Not Allowed: /myapp/students/delete/6/
+Too Many Requests: /myapp/students/delete/6/
+C:\Users\Admin\OneDrive\Desktop\drf_demo\django-employe\myapp\views.py changed, reloading.
+Watching for file changes with StatReloader
+Student 6 deleted successfully
