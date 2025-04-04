@@ -20,6 +20,8 @@ from datetime import datetime, timedelta
 from django.shortcuts import render
 from django.db.models import Avg, Min, Max, Count
 from silk.models import Request  # Ensure correct import
+from django.utils.timezone import localtime, make_aware,get_current_timezone
+
 
 
 
@@ -143,41 +145,51 @@ def most_time_overall_data(request):
 
     
 
+
+
+logger = logging.getLogger(__name__)
+
+
+
+
+
+logger = logging.getLogger(__name__)
+
 def user_profiles_view(request):
-    # Get the date from request parameters (if provided)
     date_str = request.GET.get('date')  # Format: 'YYYY-MM-DD'
-    
+    tz = get_current_timezone()  # Get system timezone
+
     if date_str:
-        from datetime import datetime
         selected_date = datetime.strptime(date_str, "%Y-%m-%d").date()
-        start_date = datetime.combine(selected_date, datetime.min.time())  # 00:00:00
-        end_date = datetime.combine(selected_date, datetime.max.time())  # 23:59:59
-        
-        # Filter requests by selected date
+        start_date = make_aware(datetime.combine(selected_date, datetime.min.time()), timezone=tz)
+        end_date = make_aware(datetime.combine(selected_date, datetime.max.time()), timezone=tz)
+
         user_profiles = Request.objects.filter(start_time__range=[start_date, end_date])
     else:
-        # If no date is provided, fetch all records
         user_profiles = Request.objects.all()
 
-    # Aggregate data by HTTP method
     aggregated_profiles = user_profiles.values('method').annotate(
         avg_time_taken=Avg('time_taken'),
-        min_time_taken=Min('time_taken'),
-        max_time_taken=Max('time_taken'),
-        request_count=Count('id'),  # Count of API calls per method
-        first_start_time=Min('start_time'),  # Earliest request time
-        last_start_time=Max('start_time')   # Latest request time
+        request_count=Count('id'),
+        first_start_time=Min('start_time'),
+        last_start_time=Max('start_time')
     )
 
-    # Convert the QuerySet to a list of dictionaries
-    aggregated_profiles_list = list(aggregated_profiles)
+    # Convert UTC times to system timezone & format them
+    aggregated_profiles_list = [
+        {
+            'method': profile['method'],
+            'avg_time_taken': profile['avg_time_taken'],
+            'request_count': profile['request_count'],
+            'first_start_time': localtime(profile['first_start_time'], tz).strftime('%Y-%m-%d %I:%M %p') if profile['first_start_time'] else 'N/A',
+            'last_start_time': localtime(profile['last_start_time'], tz).strftime('%Y-%m-%d %I:%M %p') if profile['last_start_time'] else 'N/A'
+        }
+        for profile in aggregated_profiles
+    ]
 
     context = {
         'aggregated_profiles': aggregated_profiles_list,
-        'selected_date': date_str,  # Pass selected date to template
+        'selected_date': date_str,
     }
 
     return render(request, 'silk/appname_profiling.html', context)
-
-
-

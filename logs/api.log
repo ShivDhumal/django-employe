@@ -2549,3 +2549,39 @@ Not Found: /create//
 Bad Request: /create/
 New employee created
 Too Many Requests: /list/
+C:\Users\Admin\OneDrive\Desktop\drf_demo\django-employe\appname\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\drf_demo\django-employe\appname\views.py changed, reloading.
+Watching for file changes with StatReloader
+Employee list accessed
+C:\Users\Admin\OneDrive\Desktop\drf_demo\django-employe\employe\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\drf_demo\django-employe\appname\views.py changed, reloading.
+Watching for file changes with StatReloader
+Employee list accessed
+C:\Users\Admin\OneDrive\Desktop\drf_demo\django-employe\appname\views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\drf_demo\django-employe\appname\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\drf_demo\django-employe\appname\views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /silk/user_prof/
+Traceback (most recent call last):
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive\Desktop\DRF\employe\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin\OneDrive\Desktop\drf_demo\django-employe\appname\views.py", line 164, in user_profiles_view
+    utc = pytz.utc
+          ^^^^
+NameError: name 'pytz' is not defined
+C:\Users\Admin\OneDrive\Desktop\drf_demo\django-employe\appname\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\Admin\OneDrive\Desktop\drf_demo\django-employe\appname\views.py changed, reloading.
+Watching for file changes with StatReloader
