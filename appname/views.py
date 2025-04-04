@@ -15,6 +15,8 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from silk.models import Request
 from django.db.models import Avg
+from datetime import datetime, timedelta
+
 
 
 
@@ -137,9 +139,38 @@ def most_time_overall_data(request):
 
        
 
+# def user_profiles_view(request):
+#     # Fetch the profiling data for 'demo'
+#     user_profiles = Request.objects.filter(path__startswith="/")
+
+#     # Aggregate by method and calculate the average time taken for each method
+#     aggregated_profiles = user_profiles.values('method').annotate(
+#         avg_time_taken=Avg('time_taken')
+#     )
+
+#     # Convert the QuerySet to a list of dictionaries (serializable)
+#     aggregated_profiles_list = list(aggregated_profiles)
+
+#     context = {
+#         'aggregated_profiles': aggregated_profiles_list,
+#     }
+#     return render(request, 'silk/appname_profiling.html',context)
+
 def user_profiles_view(request):
-    # Fetch the profiling data for 'demo'
-    user_profiles = Request.objects.filter(path__startswith="/")
+    # Get the date from request parameters (if provided)
+    date_str = request.GET.get('date')  # Format: 'YYYY-MM-DD'
+    
+    # Convert date string to a date object
+    if date_str:
+        selected_date = datetime.strptime(date_str, "%Y-%m-%d").date()
+        start_date = datetime.combine(selected_date, datetime.min.time())  # 00:00:00
+        end_date = datetime.combine(selected_date, datetime.max.time())  # 23:59:59
+        
+        # Filter requests by selected date
+        user_profiles = Request.objects.filter(path__startswith="/", start_time__range=[start_date, end_date])
+    else:
+        # If no date is provided, fetch all records
+        user_profiles = Request.objects.filter(path__startswith="/")
 
     # Aggregate by method and calculate the average time taken for each method
     aggregated_profiles = user_profiles.values('method').annotate(
@@ -151,9 +182,10 @@ def user_profiles_view(request):
 
     context = {
         'aggregated_profiles': aggregated_profiles_list,
+        'selected_date': date_str,  # Pass the selected date to the template
     }
-    return render(request, 'silk/appname_profiling.html',context)
-    # return render(request, 'silk/appname_profiling.html', context)      
+    return render(request, 'silk/appname_profiling.html', context)
+
      
                             
 
