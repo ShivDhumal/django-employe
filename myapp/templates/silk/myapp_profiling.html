@@ -9,7 +9,6 @@
 </head>
 <body>
 
-{% block content %}
 <div class="container mx-auto py-4">
     <h2 class="text-2xl text-center text-teal-600 font-semibold mb-6">APP2 Profiling</h2>
 
@@ -20,15 +19,7 @@
                 <a href="{% url 'silk:profiling' %}" class="text-teal-600 hover:underline">Profiling</a>
                 <span class="text-gray-500">/</span>
             </li>
-            <li class="text-gray-700">
-                {% if 'user_prof' in request.path %}
-                    Account
-                {% elif 'demo_prof' in request.path %}
-                    Demo
-                {% else %}
-                    Current Page
-                {% endif %}
-            </li>
+            <li class="text-gray-700">Demo</li>
         </ol>
     </nav>
 
@@ -92,7 +83,7 @@ document.getElementById("toggleChartBtn").addEventListener("click", function () 
 });
 
 function loadChart() {
-    fetch("{% url 'overall_api_chart_data' %}")  // API endpoint
+    fetch("{% url 'overall_api_chart_data2' %}")
         .then(response => response.json())
         .then(data => {
             const ctx = document.getElementById("apiMethodsChart").getContext("2d");
@@ -120,6 +111,5 @@ function loadChart() {
 }
 </script>
 
-{% endblock %}
 </body>
 </html>

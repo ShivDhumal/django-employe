@@ -20,6 +20,7 @@ from appname.views import user_profiles_view
 from myapp.views import demo_profiles_view
 from django.urls import path
 from appname.views import overall_api_chart_data
+from myapp.views import overall_api_chart_data2
 
 
 urlpatterns = [
@@ -30,7 +31,7 @@ urlpatterns = [
     path('silk/demo_prof/', demo_profiles_view, name='demo_profiles'), 
 
     path("api/overall-chart/", overall_api_chart_data, name="overall_api_chart_data"),
-  
+    path("api/overall-chart2/",overall_api_chart_data2, name="overall_api_chart_data2"),
 
 
 

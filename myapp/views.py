@@ -1,10 +1,9 @@
 import logging
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from django.shortcuts import render
 from django.db.models import Avg, Min, Max, Count
 from datetime import datetime
 from silk.models import Request  # Ensure this is the correct import for Silk Request model
-from django.utils.dateformat import format
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
@@ -89,13 +88,14 @@ def demo_profiles_view(request):
         last_start_time=Max('start_time')
     )
 
+    # Format date-time in AM/PM format
     aggregated_profiles_list = [
         {
             "method": profile["method"],
             "avg_time_taken": profile["avg_time_taken"],
             "request_count": profile["request_count"],
-            "first_start_time": format(profile["first_start_time"], "Y-m-d H:i:s") if profile["first_start_time"] else None,
-            "last_start_time": format(profile["last_start_time"], "Y-m-d H:i:s") if profile["last_start_time"] else None,
+            "first_start_time": profile["first_start_time"].strftime("%Y-%m-%d %I:%M %p") if profile["first_start_time"] else "N/A",
+            "last_start_time": profile["last_start_time"].strftime("%Y-%m-%d %I:%M %p") if profile["last_start_time"] else "N/A",
         }
         for profile in aggregated_profiles
     ]
@@ -107,5 +107,12 @@ def demo_profiles_view(request):
 
     return render(request, 'silk/myapp_profiling.html', context)
 
-
-
+def overall_api_chart_data2(request):
+    data = (
+        Request.objects.filter(path__startswith="/myapp/")
+        .values("method")
+        .annotate(request_count=Count("id"))
+        .order_by("method")
+    )
+    chart_data = {entry["method"]: entry["request_count"] for entry in data}
+    return JsonResponse(chart_data)
