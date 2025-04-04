@@ -1,25 +1,20 @@
 import logging
 from django.http import Http404
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework import status
-from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
-from silk.profiling.profiler import silk_profile
-from .models import Student
-from .serializers import StudentSerializer
-from silk.models import Request
-from django.shortcuts import render
-from django.db.models import Avg
 from django.shortcuts import render
 from django.db.models import Avg, Min, Max, Count
 from datetime import datetime
-from silk.models import Request  # Ensure this is the correct import for your Silk Request model
+from silk.models import Request  # Ensure this is the correct import for Silk Request model
+from django.utils.dateformat import format
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import status
+from silk.profiling.profiler import silk_profile
+from .models import Student
+from .serializers import StudentSerializer
 
 logger = logging.getLogger(__name__)
 
 class StudentList(APIView):
-    # throttle_classes = [AnonRateThrottle, UserRateThrottle]
-
     @silk_profile(name="Student List API")
     def get(self, request, pk=None):
         try:
@@ -44,10 +39,7 @@ class StudentCreate(APIView):
             return Response({'message': 'Student added successfully', 'data': serializer.data}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 class StudentUpdate(APIView):
-    throttle_classes = [AnonRateThrottle, UserRateThrottle]
-
     @silk_profile(name="Student Put API")
     def put(self, request, pk):
         try:
@@ -63,10 +55,8 @@ class StudentUpdate(APIView):
             return Response({'message': 'Student updated successfully', 'data': serializer.data})
         logger.error("Update failed for Student")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#for deletion
-class StudentDelete(APIView):
-    throttle_classes = [AnonRateThrottle, UserRateThrottle]
 
+class StudentDelete(APIView):
     def delete(self, request, pk):
         try:
             student = Student.objects.get(pk=pk)
@@ -76,31 +66,22 @@ class StudentDelete(APIView):
         except Student.DoesNotExist:
             logger.error(f"Delete failed: Student {pk} not found")
             raise Http404("Student Not Found")
-        
-
-
-
 
 def demo_profiles_view(request):
-    # Get the date from request parameters (if provided)
-    date_str = request.GET.get('date')  # Format: 'YYYY-MM-DD'
-    
-    # Convert date string to a date object
+    date_str = request.GET.get('date')
+
     if date_str:
         selected_date = datetime.strptime(date_str, "%Y-%m-%d").date()
-        start_date = datetime.combine(selected_date, datetime.min.time())  # 00:00:00
-        end_date = datetime.combine(selected_date, datetime.max.time())  # 23:59:59
-        
-        # Filter requests by selected date and path for 'myapp'
+        start_date = datetime.combine(selected_date, datetime.min.time())
+        end_date = datetime.combine(selected_date, datetime.max.time())
+
         user_profiles = Request.objects.filter(
             path__startswith="/myapp/",
             start_time__range=[start_date, end_date]
         )
     else:
-        # If no date is provided, fetch all records for 'myapp'
         user_profiles = Request.objects.filter(path__startswith="/myapp/")
 
-    # Aggregate by method and calculate various statistics
     aggregated_profiles = user_profiles.values('method').annotate(
         avg_time_taken=Avg('time_taken'),
         request_count=Count('id'),
@@ -108,17 +89,23 @@ def demo_profiles_view(request):
         last_start_time=Max('start_time')
     )
 
-    # Convert QuerySet to a list of dictionaries (serializable)
-    aggregated_profiles_list = list(aggregated_profiles)
+    aggregated_profiles_list = [
+        {
+            "method": profile["method"],
+            "avg_time_taken": profile["avg_time_taken"],
+            "request_count": profile["request_count"],
+            "first_start_time": format(profile["first_start_time"], "Y-m-d H:i:s") if profile["first_start_time"] else None,
+            "last_start_time": format(profile["last_start_time"], "Y-m-d H:i:s") if profile["last_start_time"] else None,
+        }
+        for profile in aggregated_profiles
+    ]
 
     context = {
         'aggregated_profiles': aggregated_profiles_list,
-        'selected_date': date_str,  # Pass the selected date to the template
+        'selected_date': date_str,
     }
 
     return render(request, 'silk/myapp_profiling.html', context)
 
-
-from django.shortcuts import render
 
 

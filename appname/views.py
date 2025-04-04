@@ -195,3 +195,14 @@ def user_profiles_view(request):
     return render(request, 'silk/appname_profiling.html', context)
 
 
+
+
+
+def overall_api_chart_data(request):
+    data = (
+        Request.objects.values("method")
+        .annotate(request_count=Count("id"))
+        .order_by("method")
+    )
+    chart_data = {entry["method"]: entry["request_count"] for entry in data}
+    return JsonResponse(chart_data)

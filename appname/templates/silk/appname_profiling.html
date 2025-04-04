@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Profiling</title>
-    <!-- Include Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -13,24 +13,36 @@
 <div class="container mx-auto py-4">
     <h2 class="text-2xl text-center text-teal-600 font-semibold mb-6">APP1 Profiling</h2>
 
-    <!-- Breadcrumb Navigation -->
-    <nav class="mb-4 px-6">
-        <ul class="flex items-center space-x-2 text-gray-600 text-lg font-medium">
+     <!-- Breadcrumbs Section -->
+     <nav aria-label="breadcrumb" class="my-3 px-6">
+        <ol class="flex space-x-2 text-lg font-semibold">
             <li>
-                <a href="{% url 'silk:profiling' %}" class="text-teal-600 hover:underline">Home</a>
+                <a href="{% url 'silk:profiling' %}" class="text-teal-600 hover:underline">Profiling</a>
+                <span class="text-gray-500">/</span>
             </li>
-            <li>/</li>
-            <li>
+            <li class="text-gray-700">
                 {% if 'user_prof' in request.path %}
-                    <span class="text-gray-500">Account</span>
+                    Account
                 {% elif 'demo_prof' in request.path %}
-                    <span class="text-gray-500">Demo</span>
+                    Demo
                 {% else %}
-                    <span class="text-gray-500">Current Page</span>
+                    Current Page
                 {% endif %}
             </li>
-        </ul>
+        </ol>
     </nav>
+
+    <!-- Chart Toggle Button -->
+    <div class="flex justify-center mb-4">
+        <button id="toggleChartBtn" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">
+            Show Overall API Chart
+        </button>
+    </div>
+
+    <!-- Chart Container (Hidden Initially) -->
+    <div id="chartContainer" class="bg-white p-4 rounded-lg shadow-md hidden">
+        <canvas id="apiMethodsChart"></canvas>
+    </div>
 
     <!-- Date Filter Form -->
     <form method="GET" action="." class="mb-6 flex justify-center items-center gap-4">
@@ -54,7 +66,7 @@
                     <div class="block mb-4 p-4 rounded-lg shadow-md border-2 border-teal-600 hover:bg-gray-100">
                         <h4 class="font-semibold text-teal-600">{{ profile.method }}</h4>
                         <p><strong>Avg Time:</strong> {{ profile.avg_time_taken|floatformat:2 }} ms</p>
-                        <p><strong>Employe Request Count:</strong> {{ profile.request_count }}</p>
+                        <p><strong>Request Count:</strong> {{ profile.request_count }}</p>
                         <p><strong>First Request:</strong> {{ profile.first_start_time }}</p>
                         <p><strong>Last Request:</strong> {{ profile.last_start_time }}</p>
                     </div>
@@ -65,7 +77,49 @@
         {% endif %}
     </div>
 </div>
-{% endblock %}
 
+<script>
+document.getElementById("toggleChartBtn").addEventListener("click", function () {
+    const chartContainer = document.getElementById("chartContainer");
+    if (chartContainer.classList.contains("hidden")) {
+        chartContainer.classList.remove("hidden");
+        this.textContent = "Hide Overall API Chart";
+        loadChart();
+    } else {
+        chartContainer.classList.add("hidden");
+        this.textContent = "Show Overall API Chart";
+    }
+});
+
+function loadChart() {
+    fetch("{% url 'overall_api_chart_data' %}")  // API endpoint
+        .then(response => response.json())
+        .then(data => {
+            const ctx = document.getElementById("apiMethodsChart").getContext("2d");
+            new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: Object.keys(data),
+                    datasets: [{
+                        label: "Request Count",
+                        data: Object.values(data),
+                        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4CAF50"],
+                        borderColor: "#222",
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        });
+}
+</script>
+
+{% endblock %}
 </body>
 </html>
