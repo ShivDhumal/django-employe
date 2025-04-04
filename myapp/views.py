@@ -103,8 +103,6 @@ def demo_profiles_view(request):
     # Aggregate by method and calculate various statistics
     aggregated_profiles = user_profiles.values('method').annotate(
         avg_time_taken=Avg('time_taken'),
-        min_time_taken=Min('time_taken'),
-        max_time_taken=Max('time_taken'),
         request_count=Count('id'),
         first_start_time=Min('start_time'),
         last_start_time=Max('start_time')
@@ -119,4 +117,8 @@ def demo_profiles_view(request):
     }
 
     return render(request, 'silk/myapp_profiling.html', context)
+
+
+from django.shortcuts import render
+
 

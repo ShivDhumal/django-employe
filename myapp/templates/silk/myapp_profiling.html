@@ -15,15 +15,16 @@
 
     <!-- Breadcrumbs Section -->
     <nav aria-label="breadcrumb" class="my-3 px-6">
-        <ol class="breadcrumb flex text-lg font-semibold">
-            <li class="breadcrumb-item">
+        <ol class="flex space-x-2 text-lg font-semibold">
+            <li>
                 <a href="{% url 'silk:profiling' %}" class="text-teal-600 hover:underline">Profiling</a>
+                <span class="text-gray-500">/</span>
             </li>
-            <li class="breadcrumb-item active text-gray-700" aria-current="page">
+            <li class="text-gray-700">
                 {% if 'user_prof' in request.path %}
-                    >Account
+                    Account
                 {% elif 'demo_prof' in request.path %}
-                    >Demo
+                    Demo
                 {% else %}
                     Current Page
                 {% endif %}

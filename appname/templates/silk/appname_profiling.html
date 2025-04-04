@@ -13,22 +13,23 @@
 <div class="container mx-auto py-4">
     <h2 class="text-2xl text-center text-teal-600 font-semibold mb-6">APP1 Profiling</h2>
 
-    <!-- Breadcrumbs Section -->
-    <nav aria-label="breadcrumb" class="my-3 px-6">
-        <ol class="breadcrumb flex text-lg font-semibold">
-            <li class="breadcrumb-item">
-                <a href="{% url 'silk:profiling' %}" class="text-teal-600 hover:underline">Profiling</a>
+    <!-- Breadcrumb Navigation -->
+    <nav class="mb-4 px-6">
+        <ul class="flex items-center space-x-2 text-gray-600 text-lg font-medium">
+            <li>
+                <a href="{% url 'silk:profiling' %}" class="text-teal-600 hover:underline">Home</a>
             </li>
-            <li class="breadcrumb-item active text-gray-700" aria-current="page">
+            <li>/</li>
+            <li>
                 {% if 'user_prof' in request.path %}
-                    >Account
+                    <span class="text-gray-500">Account</span>
                 {% elif 'demo_prof' in request.path %}
-                    >Demo
+                    <span class="text-gray-500">Demo</span>
                 {% else %}
-                    Current Page
+                    <span class="text-gray-500">Current Page</span>
                 {% endif %}
             </li>
-        </ol>
+        </ul>
     </nav>
 
     <!-- Date Filter Form -->

@@ -193,3 +193,5 @@ def user_profiles_view(request):
     }
 
     return render(request, 'silk/appname_profiling.html', context)
+
+
