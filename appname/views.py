@@ -16,6 +16,10 @@ from django.http import JsonResponse
 from silk.models import Request
 from django.db.models import Avg
 from datetime import datetime, timedelta
+   
+from django.shortcuts import render
+from django.db.models import Avg, Min, Max, Count
+from silk.models import Request  # Ensure correct import
 
 
 
@@ -137,56 +141,43 @@ def most_time_overall_data(request):
     return JsonResponse(data,safe=False)
 
 
-       
-
-# def user_profiles_view(request):
-#     # Fetch the profiling data for 'demo'
-#     user_profiles = Request.objects.filter(path__startswith="/")
-
-#     # Aggregate by method and calculate the average time taken for each method
-#     aggregated_profiles = user_profiles.values('method').annotate(
-#         avg_time_taken=Avg('time_taken')
-#     )
-
-#     # Convert the QuerySet to a list of dictionaries (serializable)
-#     aggregated_profiles_list = list(aggregated_profiles)
-
-#     context = {
-#         'aggregated_profiles': aggregated_profiles_list,
-#     }
-#     return render(request, 'silk/appname_profiling.html',context)
+    
 
 def user_profiles_view(request):
     # Get the date from request parameters (if provided)
     date_str = request.GET.get('date')  # Format: 'YYYY-MM-DD'
     
-    # Convert date string to a date object
     if date_str:
+        from datetime import datetime
         selected_date = datetime.strptime(date_str, "%Y-%m-%d").date()
         start_date = datetime.combine(selected_date, datetime.min.time())  # 00:00:00
         end_date = datetime.combine(selected_date, datetime.max.time())  # 23:59:59
         
         # Filter requests by selected date
-        user_profiles = Request.objects.filter(path__startswith="/", start_time__range=[start_date, end_date])
+        user_profiles = Request.objects.filter(start_time__range=[start_date, end_date])
     else:
         # If no date is provided, fetch all records
-        user_profiles = Request.objects.filter(path__startswith="/")
+        user_profiles = Request.objects.all()
 
-    # Aggregate by method and calculate the average time taken for each method
+    # Aggregate data by HTTP method
     aggregated_profiles = user_profiles.values('method').annotate(
-        avg_time_taken=Avg('time_taken')
+        avg_time_taken=Avg('time_taken'),
+        min_time_taken=Min('time_taken'),
+        max_time_taken=Max('time_taken'),
+        request_count=Count('id'),  # Count of API calls per method
+        first_start_time=Min('start_time'),  # Earliest request time
+        last_start_time=Max('start_time')   # Latest request time
     )
 
-    # Convert the QuerySet to a list of dictionaries (serializable)
+    # Convert the QuerySet to a list of dictionaries
     aggregated_profiles_list = list(aggregated_profiles)
 
     context = {
         'aggregated_profiles': aggregated_profiles_list,
-        'selected_date': date_str,  # Pass the selected date to the template
+        'selected_date': date_str,  # Pass selected date to template
     }
+
     return render(request, 'silk/appname_profiling.html', context)
 
-     
-                            
 
 
