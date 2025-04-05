@@ -13,8 +13,8 @@
 <div class="container mx-auto py-4">
     <h2 class="text-2xl text-center text-teal-600 font-semibold mb-6">APP1 Profiling</h2>
 
-     <!-- Breadcrumbs Section -->
-     <nav aria-label="breadcrumb" class="my-3 px-6">
+    <!-- Breadcrumbs Section -->
+    <nav aria-label="breadcrumb" class="my-3 px-6">
         <ol class="flex space-x-2 text-lg font-semibold">
             <li>
                 <a href="{% url 'silk:profiling' %}" class="text-teal-600 hover:underline">Profiling</a>
@@ -71,6 +71,23 @@
                         <p><strong>Last Request:</strong> {{ profile.last_start_time }}</p>
                     </div>
                 {% endfor %}
+            </div>
+
+            <!-- Pagination Controls -->
+            <div class="flex justify-center mt-6">
+                {% if aggregated_profiles.has_previous %}
+                    <a href="?page=1{% if selected_date %}&date={{ selected_date }}{% endif %}" class="px-3 py-2 bg-gray-300 rounded-md mx-1">First</a>
+                    <a href="?page={{ aggregated_profiles.previous_page_number }}{% if selected_date %}&date={{ selected_date }}{% endif %}" class="px-3 py-2 bg-gray-300 rounded-md mx-1">Previous</a>
+                {% endif %}
+
+                <span class="px-3 py-2 bg-teal-600 text-white rounded-md mx-1">
+                    Page {{ aggregated_profiles.number }} of {{ aggregated_profiles.paginator.num_pages }}
+                </span>
+
+                {% if aggregated_profiles.has_next %}
+                    <a href="?page={{ aggregated_profiles.next_page_number }}{% if selected_date %}&date={{ selected_date }}{% endif %}" class="px-3 py-2 bg-gray-300 rounded-md mx-1">Next</a>
+                    <a href="?page={{ aggregated_profiles.paginator.num_pages }}{% if selected_date %}&date={{ selected_date }}{% endif %}" class="px-3 py-2 bg-gray-300 rounded-md mx-1">Last</a>
+                {% endif %}
             </div>
         {% else %}
             <p class="text-gray-600 text-center">No API profiles found for the selected date.</p>

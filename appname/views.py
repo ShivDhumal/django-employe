@@ -22,7 +22,7 @@ from django.db.models import Avg, Min, Max, Count
 from silk.models import Request  # Ensure correct import
 from django.utils.timezone import localtime, make_aware,get_current_timezone
 
-
+from django.core.paginator import Paginator
 
 
 
@@ -153,10 +153,10 @@ logger = logging.getLogger(__name__)
 
 
 
-logger = logging.getLogger(__name__)
 
 def user_profiles_view(request):
     date_str = request.GET.get('date')  # Format: 'YYYY-MM-DD'
+    page_number = request.GET.get('page', 1)  # Get current page, default to 1
     tz = get_current_timezone()  # Get system timezone
 
     if date_str:
@@ -175,7 +175,6 @@ def user_profiles_view(request):
         last_start_time=Max('start_time')
     )
 
-    # Convert UTC times to system timezone & format them
     aggregated_profiles_list = [
         {
             'method': profile['method'],
@@ -187,14 +186,16 @@ def user_profiles_view(request):
         for profile in aggregated_profiles
     ]
 
+    # Pagination
+    paginator = Paginator(aggregated_profiles_list, 5)  # Show 5 items per page
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        'aggregated_profiles': aggregated_profiles_list,
+        'aggregated_profiles': page_obj,
         'selected_date': date_str,
     }
 
     return render(request, 'silk/appname_profiling.html', context)
-
-
 
 
 
