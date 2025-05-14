@@ -26,6 +26,10 @@ from django.core.paginator import Paginator
 
 
 
+import csv
+from django.http import HttpResponse
+from silk.models import Request
+
 
 
 logger = logging.getLogger(__name__)
@@ -207,3 +211,38 @@ def overall_api_chart_data(request):
     )
     chart_data = {entry["method"]: entry["request_count"] for entry in data}
     return JsonResponse(chart_data)
+
+
+
+
+
+
+
+
+def export_all_requests_csv(request):
+    # Get all request data
+    all_requests = Request.objects.all().order_by('method', 'start_time')
+
+    # Create response with CSV content type
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="all_api_requests.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['Method', 'ID', 'Path', 'Time Taken (ms)', 'Start Time'])
+
+    for r in all_requests:
+        writer.writerow([
+            r.method,
+            r.id,
+            r.path,
+            round(r.time_taken or 0, 2),
+            r.start_time.strftime('%Y-%m-%d %I:%M %p') if r.start_time else ''
+        ])
+
+    return response
+
+
+
+
+
+

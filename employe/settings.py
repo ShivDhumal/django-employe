@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'silk',
     'employe',
     'myapp',
+    'debug_toolbar',
     
 ]
     
@@ -57,6 +58,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
    'silk.middleware.SilkyMiddleware',
+   'debug_toolbar.middleware.DebugToolbarMiddleware',
+]
+
+INTERNAL_IPS = [
+    '127.0.0.1',  # Add any other IPs you want to allow
 ]
 
 ROOT_URLCONF = 'employe.urls'
