@@ -215,10 +215,6 @@ def overall_api_chart_data(request):
 
 
 
-
-
-
-
 def export_all_requests_csv(request):
     # Get all request data
     all_requests = Request.objects.all().order_by('method', 'start_time')
