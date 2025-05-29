@@ -5,8 +5,7 @@ from django.conf import settings
 from appname.views import (
     user_profiles_view,
     overall_api_chart_data,
-    export_all_requests_csv,
-)
+    export_all_requests_csv)
 from myapp.views import demo_profiles_view, overall_api_chart_data2
 
 urlpatterns = [
@@ -29,7 +28,3 @@ urlpatterns = [
     # Admin
     path('admin/', admin.site.urls),
 ]
-
-if settings.DEBUG:
-    import debug_toolbar
-    urlpatterns = [path('__debug__/', include(debug_toolbar.urls))] + urlpatterns

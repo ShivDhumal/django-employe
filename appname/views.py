@@ -1,38 +1,30 @@
 import logging
+import csv
+from datetime import datetime
+
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
-from django.http import Http404, JsonResponse
-from django.shortcuts import render
-from .models import employee
-from .serializers import employe_serializer
 from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
-from silk.profiling.profiler import silk_profile
-from django.db.models import Avg, Sum
-from silk.models import Request, Profile
-from django.shortcuts import render
 
-from django.http import JsonResponse
-from silk.models import Request
-from django.db.models import Avg
-from datetime import datetime, timedelta
-   
-from django.shortcuts import render
+from django.http import Http404, JsonResponse, HttpResponse
+from django.shortcuts import render, get_object_or_404
 from django.db.models import Avg, Min, Max, Count
-from silk.models import Request  # Ensure correct import
-from django.utils.timezone import localtime, make_aware,get_current_timezone
-
+from django.utils.timezone import localtime, make_aware, get_current_timezone
 from django.core.paginator import Paginator
+from django.db import connection
 
+from silk.profiling.profiler import silk_profile
+from silk.models import Request, Profile
 
-
-import csv
-from django.http import HttpResponse
-from silk.models import Request
-
-
+from .models import employee       
+from .serializers import employe_serializer
 
 logger = logging.getLogger(__name__)
+
+# ---------------------------------------------------------------------
+# EMPLOYEE CRUD  (unchanged)
+# ---------------------------------------------------------------------
 
 class employe_list(APIView):
     throttle_classes = [AnonRateThrottle, UserRateThrottle]
@@ -53,6 +45,7 @@ class employe_list(APIView):
             logger.error("Employee not found")
             raise Http404("Employee Not Found")
 
+
 class Create(APIView):
     throttle_classes = [AnonRateThrottle, UserRateThrottle]
 
@@ -65,6 +58,7 @@ class Create(APIView):
             return Response({'data': request.data})
         logger.warning(f"Failed employee creation: {serializer.errors}")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class Update(APIView):
     throttle_classes = [AnonRateThrottle, UserRateThrottle]
@@ -81,9 +75,11 @@ class Update(APIView):
         if serializer.is_valid():
             serializer.save()
             logger.info("Employee updated successfully")
-            return Response({'message': 'Employee updated successfully', 'data': serializer.data})
+            return Response({'message': 'Employee updated successfully',
+                             'data': serializer.data})
         logger.error("Update failed for Employee")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class Delete(APIView):
     throttle_classes = [AnonRateThrottle, UserRateThrottle]
@@ -93,21 +89,23 @@ class Delete(APIView):
             item = employee.objects.get(pk=pk)
             item.delete()
             logger.info(f"Employee {pk} deleted successfully")
-            return Response({'message': 'Employee deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+            return Response({'message': 'Employee deleted successfully'},
+                            status=status.HTTP_204_NO_CONTENT)
         except employee.DoesNotExist:
             logger.error(f"Delete failed: Employee {pk} not found")
             raise Http404("Employee Not Found")
 
-
-
-
+# ---------------------------------------------------------------------
+# SILK-BASED DASHBOARD / CHART VIEWS  (unchanged)
+# ---------------------------------------------------------------------
 
 def silk_chart_data(request):
     try:
         total_requests = Request.objects.count()
         total_profiles = Profile.objects.count()
         total_response_time = sum(p.time_taken or 0 for p in Profile.objects.all())
-        total_query_time = sum(sum(q.time_taken for q in p.queries.all()) for p in Profile.objects.all())
+        total_query_time = sum(sum(q.time_taken for q in p.queries.all())
+                               for p in Profile.objects.all())
         total_query_count = sum(p.queries.count() for p in Profile.objects.all())
 
         avg_response_time = total_response_time / total_profiles if total_profiles else 0
@@ -124,50 +122,49 @@ def silk_chart_data(request):
         return JsonResponse(data)
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=500)
-        
+
+
 def silk_chart_view(request):
     return render(request, 'silk/chart.html')
 
-#for most_db_queries.html
 
+# -- Most DB queries
 def most_db_queries_view(request):
     return render(request, 'silk/most_db_queries.html')
+
+
 def most_queries_chart_api(request):
-    data = [{'view_name': r.view_name, 'num_queries': r.num_sql_queries} for r in Request.objects.order_by('-num_sql_queries')]
-    return JsonResponse(data, safe=False)  # ✅ Corrected syntax
+    data = [
+        {'view_name': r.view_name, 'num_queries': r.num_sql_queries}
+        for r in Request.objects.order_by('-num_sql_queries')
+    ]
+    return JsonResponse(data, safe=False)
 
 
-
-#for chart_most_time_overall.html
+# -- Slowest overall requests
 def chart_most_time_overall_view(request):
     return render(request, 'silk/chart_most_time_overall.html')
 
+
 def most_time_overall_data(request):
-    data = [{'path': r.path, 'time_taken': round(r.time_taken, 2)} for r in Request.objects.order_by('-time_taken')[:10]]
-    return JsonResponse(data,safe=False)
+    data = [
+        {'path': r.path, 'time_taken': round(r.time_taken, 2)}
+        for r in Request.objects.order_by('-time_taken')[:10]
+    ]
+    return JsonResponse(data, safe=False)
 
-
-    
-
-
-
-logger = logging.getLogger(__name__)
-
-
-
-
-
-
+# -- Aggregated profile / pagination
 def user_profiles_view(request):
-    date_str = request.GET.get('date')  # Format: 'YYYY-MM-DD'
-    page_number = request.GET.get('page', 1)  # Get current page, default to 1
-    tz = get_current_timezone()  # Get system timezone
+    date_str = request.GET.get('date')          # 'YYYY-MM-DD'
+    page_number = request.GET.get('page', 1)
+    tz = get_current_timezone()
 
     if date_str:
         selected_date = datetime.strptime(date_str, "%Y-%m-%d").date()
-        start_date = make_aware(datetime.combine(selected_date, datetime.min.time()), timezone=tz)
-        end_date = make_aware(datetime.combine(selected_date, datetime.max.time()), timezone=tz)
-
+        start_date = make_aware(datetime.combine(selected_date, datetime.min.time()),
+                                timezone=tz)
+        end_date = make_aware(datetime.combine(selected_date, datetime.max.time()),
+                              timezone=tz)
         user_profiles = Request.objects.filter(start_time__range=[start_date, end_date])
     else:
         user_profiles = Request.objects.all()
@@ -181,26 +178,24 @@ def user_profiles_view(request):
 
     aggregated_profiles_list = [
         {
-            'method': profile['method'],
-            'avg_time_taken': profile['avg_time_taken'],
-            'request_count': profile['request_count'],
-            'first_start_time': localtime(profile['first_start_time'], tz).strftime('%Y-%m-%d %I:%M %p') if profile['first_start_time'] else 'N/A',
-            'last_start_time': localtime(profile['last_start_time'], tz).strftime('%Y-%m-%d %I:%M %p') if profile['last_start_time'] else 'N/A'
+            'method': p['method'],
+            'avg_time_taken': p['avg_time_taken'],
+            'request_count': p['request_count'],
+            'first_start_time': localtime(p['first_start_time'], tz)
+                                .strftime('%Y-%m-%d %I:%M %p') if p['first_start_time'] else 'N/A',
+            'last_start_time': localtime(p['last_start_time'], tz)
+                               .strftime('%Y-%m-%d %I:%M %p') if p['last_start_time'] else 'N/A'
         }
-        for profile in aggregated_profiles
+        for p in aggregated_profiles
     ]
 
-    # Pagination
-    paginator = Paginator(aggregated_profiles_list, 5)  # Show 5 items per page
+    paginator = Paginator(aggregated_profiles_list, 5)
     page_obj = paginator.get_page(page_number)
 
-    context = {
+    return render(request, 'silk/appname_profiling.html', {
         'aggregated_profiles': page_obj,
         'selected_date': date_str,
-    }
-
-    return render(request, 'silk/appname_profiling.html', context)
-
+    })
 
 
 def overall_api_chart_data(request):
@@ -209,17 +204,12 @@ def overall_api_chart_data(request):
         .annotate(request_count=Count("id"))
         .order_by("method")
     )
-    chart_data = {entry["method"]: entry["request_count"] for entry in data}
-    return JsonResponse(chart_data)
-
-
+    return JsonResponse({entry["method"]: entry["request_count"] for entry in data})
 
 
 def export_all_requests_csv(request):
-    # Get all request data
     all_requests = Request.objects.all().order_by('method', 'start_time')
 
-    # Create response with CSV content type
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="all_api_requests.csv"'
 
@@ -236,9 +226,3 @@ def export_all_requests_csv(request):
         ])
 
     return response
-
-
-
-
-
-
