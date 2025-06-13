@@ -22,8 +22,18 @@ INSTALLED_APPS = [
     'silk',
     'employe',
     'myapp',
-    # 'debug_toolbar',  <-- REMOVED
+   'django_prometheus',
+   'django_elasticsearch_dsl',
 ]
+
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'https://localhost:9200',
+        'http_auth': ('elastic', 'HtgouBtFJNmU9w+pI8Dd'),
+        'verify_certs': False,  # Use only for self-signed certs in development
+    },
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -34,10 +44,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'silk.middleware.SilkyMiddleware',
-    # 'debug_toolbar.middleware.DebugToolbarMiddleware',  <-- REMOVED
+    'django_prometheus.middleware.PrometheusBeforeMiddleware',
+      # your existing middleware
+    'django_prometheus.middleware.PrometheusAfterMiddleware',
 ]
 
-# INTERNAL_IPS = ['127.0.0.1']  <-- REMOVED if only used for debug_toolbar
+
 
 ROOT_URLCONF = 'employe.urls'
 

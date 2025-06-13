@@ -7,6 +7,7 @@ from appname.views import (
     overall_api_chart_data,
     export_all_requests_csv)
 from myapp.views import demo_profiles_view, overall_api_chart_data2
+from django_prometheus import exports
 
 urlpatterns = [
     # Your app URLs
@@ -27,4 +28,7 @@ urlpatterns = [
 
     # Admin
     path('admin/', admin.site.urls),
+    #for prometheus
+    path('', include('django_prometheus.urls')),
+    path('metrics/',exports.ExportToDjangoView, name='prometheus-metrics'),
 ]
